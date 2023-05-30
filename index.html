@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="scripts.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header><h1>Budżet Domowy</h1></header>
+
+    <main>
+      <h2 id="budgetCount">Stan twojego budżetu to:</h2>
+
+      <div class="table">
+        <div id="revenueTable" class="tableItem">
+          <h2>Dodaj dochód</h2>
+          <form action="" id="revenueForm">
+            <input type="text" id="revenueName" placeholder="Nazwa" required />
+            <input
+              type="number"
+              id="revenueCount"
+              placeholder="Kwota"
+              required
+            />
+            <button id="addRevenue">Dodaj</button>
+          </form>
+        </div>
+        <div id="expensesTable" class="tableItem">
+          <h2>Dodaj wydatek</h2>
+          <form action="" id="expenseForm">
+            <input type="text" id="expenseName" placeholder="Nazwa" required />
+            <input
+              type="number"
+              id="expenseCount"
+              placeholder="Kwota"
+              required
+            />
+            <button id="addExpense">Dodaj</button>
+          </form>
+        </div>
+        <div class="tableItem">
+          <h2>Lista dochodów</h2>
+          <ul id="revenueList" class="dataList"></ul>
+        </div>
+        <div class="tableItem">
+          <h2>Lista wydatków</h2>
+          <ul id="expenseList" class="dataList"></ul>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
