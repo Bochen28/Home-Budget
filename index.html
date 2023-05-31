@@ -1,41 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl">
   <head>
     <meta charset="UTF-8" />
-    <script src="scripts.js"></script>
+    <script defer src="scripts.js"></script>
     <link rel="stylesheet" href="styles.css" />
+    <title>Project JS1</title>
   </head>
   <body>
-    <header><h1>Budżet Domowy</h1></header>
+    <header class="header"><h1 class="headerText">Budżet Domowy</h1></header>
 
-    <main>
-      <h2 id="budgetCount">Stan twojego budżetu to:</h2>
-
+    <main class="content">
+      <h2 id="budgetCount" class="budgetCount">Stan twojego budżetu to:</h2>
       <div class="table">
         <div id="revenueTable" class="tableItem">
-          <h2>Dodaj dochód</h2>
-          <form action="" id="revenueForm">
-            <input type="text" id="revenueName" placeholder="Nazwa" required />
+          <h2 class="tableItemText">Dodaj dochód</h2>
+          <form action="" id="revenueForm" class="dataForm">
+            <input type="text" id="revenueName" class="dataField" placeholder="Nazwa" required />
             <input
               type="number"
               id="revenueCount"
+              class="dataField"
               placeholder="Kwota"
               required
             />
-            <button id="addRevenue">Dodaj</button>
+            <button id="addRevenue" class="addButton">Dodaj</button>
           </form>
         </div>
         <div id="expensesTable" class="tableItem">
-          <h2>Dodaj wydatek</h2>
-          <form action="" id="expenseForm">
-            <input type="text" id="expenseName" placeholder="Nazwa" required />
+          <h2 class="tableItemText">Dodaj wydatek</h2>
+          <form action="" id="expenseForm" class="dataForm">
+            <input type="text" id="expenseName" class="dataField" placeholder="Nazwa" required />
             <input
               type="number"
               id="expenseCount"
+              class="dataField"
               placeholder="Kwota"
               required
             />
-            <button id="addExpense">Dodaj</button>
+            <button id="addExpense" class="addButton">Dodaj</button>
           </form>
         </div>
         <div class="tableItem">

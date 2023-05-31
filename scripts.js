@@ -14,36 +14,36 @@ document.addEventListener("DOMContentLoaded", () => {
   function addRevenue(event) {
     event.preventDefault();
 
-    if (revenueCount.value <= 0) {
-      alert("Kwota musi być większa od zera");
-    } else if (revenueName.checkValidity() && revenueCount.checkValidity()) {
-      const newRevenue = { name: revenueName.value, count: revenueCount.value };
+    if (revenueName.value !== '' && revenueCount.value > 0) {
+      const newRevenue = {
+        name: revenueName.value,
+        count: parseFloat(revenueCount.value).toFixed(2),
+      };
       revenueList.push(newRevenue);
-      console.log(revenueList);
       loadRevenueList();
       revenueName.value = "";
       revenueCount.value = "";
       updateBudgetStatus();
     } else {
-      alert("Wypełnij wszystkie pola");
+      alert("Wprowadzone dane są niepoprawne");
     }
   }
 
   function addExpense(event) {
     event.preventDefault();
 
-    if (expenseCount.value <= 0) {
-      alert("Kwota musi być większa od zera");
-    } else if (expenseName.checkValidity() && expenseCount.checkValidity()) {
-      const newExpense = { name: expenseName.value, count: expenseCount.value };
+    if (expenseName.value !== '' && expenseCount.value > 0) {
+      const newExpense = {
+        name: expenseName.value,
+        count: parseFloat(expenseCount.value).toFixed(2),
+      };
       expenseList.push(newExpense);
-      console.log(expenseList);
       loadExpenseList();
       expenseName.value = "";
       expenseCount.value = "";
       updateBudgetStatus();
     } else {
-      alert("Wypełnij wszystkie pola");
+      alert("Wprowadzone dane są niepoprawne")
     }
   }
 
@@ -57,6 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const editButton = document.createElement("button");
       const deleteButton = document.createElement("button");
 
+      listItem.classList.add("dataListItem");
       nameElement.textContent = item.name;
       countElement.textContent = item.count + "zł";
       editButton.textContent = "Edit";
@@ -77,14 +78,17 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       editButton.addEventListener("click", () => {
-        const newName = prompt("Enter new name:", item.name);
-        const newCount = prompt("Enter new count:", item.count);
+        const newName = prompt("Podaj nową nazwę:", item.name);
+        const newCount = prompt("Podaj nową kwotę:", item.count);
 
-        if (newName && newCount) {
+        if (newName && newCount && newCount > 0) {
           item.name = newName;
-          item.count = newCount;
+          item.count = parseFloat(newCount).toFixed(2);
           loadRevenueList();
+          loadExpenseList();
           updateBudgetStatus();
+        } else {
+          alert("Wprowadzone dane są niepoprawne");
         }
       });
 
@@ -102,6 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const editButton = document.createElement("button");
       const deleteButton = document.createElement("button");
 
+      listItem.classList.add("dataListItem");
       nameElement.textContent = item.name;
       countElement.textContent = item.count + "zł";
       editButton.textContent = "Edit";
@@ -125,39 +130,39 @@ document.addEventListener("DOMContentLoaded", () => {
         const newName = prompt("Enter new name:", item.name);
         const newCount = prompt("Enter new count:", item.count);
 
-        if (newName && newCount) {
+        if (newName && newCount && newCount > 0) {
           item.name = newName;
-          item.count = newCount;
+          item.count = parseFloat(newCount).toFixed(2);
+          loadRevenueList();
           loadExpenseList();
           updateBudgetStatus();
+        } else {
+          alert("Wprowadzone dane są niepoprawne");
         }
       });
-
       expenseBox.appendChild(listItem);
     });
   }
 
   function updateBudgetStatus() {
     const totalRevenue = revenueList.reduce(
-      (total, revenue) => total + parseInt(revenue.count),
+      (total, revenue) => total + parseFloat(revenue.count),
       0
     );
 
     const totalExpense = expenseList.reduce(
-      (total, expense) => total + parseInt(expense.count),
+      (total, expense) => total + parseFloat(expense.count),
       0
     );
 
-    const balance = totalRevenue - totalExpense;
+    const balance = totalRevenue.toFixed(2) - totalExpense.toFixed(2);
     const budgetCount = document.querySelector("#budgetCount");
 
     if (balance > 0) {
-      budgetCount.textContent = "Możesz jeszcze wydać " + balance + " złotych";
+      budgetCount.textContent = "Możesz jeszcze wydać " + balance.toFixed(2) + " zł";
     } else if (balance < 0) {
       budgetCount.textContent =
-        "Bilans jest ujemny. Jesteś na minusie " +
-        Math.abs(balance) +
-        " złotych";
+        "Bilans jest ujemny. Jesteś na minusie " + Math.abs(balance).toFixed(2) + " zł";
     } else {
       budgetCount.textContent = "Bilans wynosi zero";
     }
